@@ -32,10 +32,18 @@ class Database(object):
         try:
             # sending get request and saving the response as response object
             response = requests.get(url=self.api_endpoint, timeout=timeout)
-            data = {'status': 'connected', 'response': 'false'} if response.text == 'false' \
-                else {'status': 'connected', 'response': response.text}
-            return data  # returns a boolean
+            if response.status_code == 200:
+                if response.text == 'true':
+                    data = {'status': 'connected', 'response': 'true'}
+                    return data
+                elif response.text == 'false':
+                    data = {'status': 'connected', 'response': 'false'}
+                    return data
+            else:
+                data = {'status': 'disconnected', 'response': 'null'}
+                return data
+
         except requests.ConnectTimeout as err:
             print('(error) - failed to connect to external database due to: {}'.format(err))
-            return {'status': 'disconnected', 'response': "false"}
+            return {'status': 'disconnected', 'response': "null"}
 
