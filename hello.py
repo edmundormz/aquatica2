@@ -31,14 +31,11 @@ def external_check_user_id(user_id):
     if response['status'] == 'connected':
         print('(info) - connected to external database, checking userID')
 
-        if response['response'] != 'No':
+        if response['response'] != 'null':
             # (userID exists in external database): update local database with the user (if any)
             local_db.insert_or_update_user_id(response['response'])
 
-            return '{}'.format(response['response'])
-        else:
-            print('(warning) - userID ({}): does not exists in external database thus has not access'.format(user_id))
-            return 'false'
+            return response['response']
     else:
         print('(warning) - could not connected to external database, checking userID from internal database')
 
