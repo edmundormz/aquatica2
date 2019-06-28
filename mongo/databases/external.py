@@ -31,7 +31,7 @@ class Database(object):
 
         try:
             # sending get request and saving the response as response object
-            response = requests.get(url=self.api_endpoint, timeout=timeout)
+            response = requests.get(url=self.api_endpoint, timeout=timeout, verify=False)
             if response.status_code == 200:
                 if response.text == 'true':
                     data = {'status': 'connected', 'response': 'true'}
