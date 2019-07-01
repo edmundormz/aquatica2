@@ -45,5 +45,7 @@ class Database(object):
 
         except requests.ConnectTimeout as err:
             print('(error) - failed to connect to external database due to: {}'.format(err))
+            pass
+        finally:
             return {'status': 'disconnected', 'response': "null"}
 
