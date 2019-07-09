@@ -13,7 +13,7 @@ class Database(object):
         :param user_id: the userID to check in the external database
         """
         # api-endpoint
-        self.api_endpoint = 'http://142.93.93.25/api/Students/canPass?nfcId={}'.format(user_id)
+        self.api_endpoint = 'https://acuaticadelfines.com.mx/api/Students/canPass?nfcId={}'.format(user_id)
 
     def get_response(self):
         """Get response from external server
